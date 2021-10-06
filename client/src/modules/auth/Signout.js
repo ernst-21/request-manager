@@ -6,9 +6,8 @@ import { Button } from 'antd';
 
 const SignoutBtn = () => {
   const history = useHistory();
-
   return (
-    <Button type="primary" onClick={() => {
+    <Button className='signout-btn' type="primary" onClick={() => {
       auth.clearJWT(() => history.push('/signin'));
     }}>
       Logout

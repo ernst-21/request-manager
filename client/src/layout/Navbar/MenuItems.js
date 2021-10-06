@@ -27,7 +27,7 @@ const MenuItems = (props) => {
           </NavLink>
         </li>
       )}
-      {auth.isAuthenticated() && (
+      {auth.isAuthenticated() && props.className === 'links-container_vertical' && (
         <>
           <li
             onClick={props.onClick}
@@ -36,18 +36,30 @@ const MenuItems = (props) => {
               fontWeight: 'bold',
               color: 'red'
             }}>
-              <span style={isActive(props.history, '/users')}>Users</span>
+              <span style={isActive(props.history, '/users')}>Pipeline</span>
             </NavLink>
           </li>
-          <SignoutBtn
-            onClick={() => {
-              auth.clearJWT(() => history.push('/'));
-            }}
+          <li
+            onClick={props.onClick}
           >
-            Sign out
-          </SignoutBtn>
+            <NavLink to="/users/todo" activeStyle={{
+              fontWeight: 'bold',
+              color: 'red'
+            }}>
+              <span style={isActive(props.history, '/users/todo')}>To Do</span>
+            </NavLink>
+          </li>
         </>
       )}
+      {auth.isAuthenticated() && <li>
+        <SignoutBtn
+          onClick={() => {
+            auth.clearJWT(() => history.push('/'));
+          }}
+        >
+          Sign out
+        </SignoutBtn>
+      </li>}
     </ul>
   );
 };

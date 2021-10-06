@@ -6,6 +6,11 @@ nav {
   place-items: center;
   height: 100%;
   background: transparent;
+  .logo {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
   .menu-items-container {
     display: flex;
     justify-content: space-between;
@@ -19,6 +24,10 @@ nav {
       margin-top: 0.9rem;
       place-items: center;
       justify-content: space-between;
+      .signout-btn {
+        background-color: #343a40;
+        border: none;
+      }
       li {
         margin: 0 .5rem;
         a {
@@ -33,10 +42,18 @@ nav {
 
   .hamburger-menu {
     display: none;
-    color: @website-dark;
+    color: white;
     font-size: 2rem;
     cursor: pointer;
   }
+}
+
+.navigation-tabs {
+  height: 55px;
+  display: flex;
+  align-items: center;
+  padding: 0 2em;
+  margin-top: 55px;
 }
 
 @media(max-width: 576px) {

@@ -4,9 +4,9 @@ import { list } from '../agent/api-agent';
 import { List, Avatar, Typography } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
-const {Title} = Typography;
+const { Title } = Typography;
 
-const Users = () => {
+const Pipeline = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -27,22 +27,23 @@ const Users = () => {
   }, []);
 
   return (
-    <List
-      itemLayout="horizontal"
-      style={{marginTop: '2rem'}}
-      dataSource={users}
-      renderItem={item => (
-        <Link to={'/users/' + item._id}>
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar size={55} src={item.pic} icon={<UserOutlined/>} /> }
-            />
-            <Title level={4}>{item.name}</Title>
-          </List.Item>
-        </Link>
-      )}
-    />
+    <div className='pipeline-container'>
+      <List
+        itemLayout="horizontal"
+        dataSource={users}
+        renderItem={item => (
+          <Link to={'/users/' + item._id}>
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar size={55} src={item.pic} icon={<UserOutlined />} />}
+              />
+              <Title level={4}>{item.name}</Title>
+            </List.Item>
+          </Link>
+        )}
+      />
+    </div>
   );
 };
 
-export default Users;
+export default Pipeline;

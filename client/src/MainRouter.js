@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './layout/Content/Home';
-import Users from './modules/travelers/Users';
+import Pipeline from './modules/travelers/Pipeline';
 import Signin from './modules/auth/Signin';
 import EditProfile from './modules/agent/EditProfile';
 import PrivateRoute from './modules/auth/PrivateRoute';
 import InfoSuccess from './modules/agent/InfoSuccess';
 import InfoError from './components/InfoError';
 import TravelerInfo from './modules/travelers/TravelerInfo';
+import TodoList from './modules/travelers/TodoList';
 
 const MainRouter = () => {
   return (
@@ -15,7 +16,8 @@ const MainRouter = () => {
       <Switch>
         <Redirect exact from="/" to="/signin" />
         <Route exact path="/" component={Home} />
-        <Route exact path="/users" component={Users} />
+        <Route exact path="/users" component={Pipeline} />
+        <Route path="/users/todo" component={TodoList} />
         <Route path="/signin" component={Signin} />
         <Route path="/info" component={InfoSuccess} />
         <Route path='/users/:userId' component={TravelerInfo}/>

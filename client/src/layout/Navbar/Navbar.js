@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import MenuButton from './MenuButton';
 import { Layout } from 'antd';
 import auth from '../../modules/auth/auth-helper';
+import NavigationTabs from '../../modules/travelers/NavigationTabs';
 
 const { Header } = Layout;
 
@@ -12,13 +13,14 @@ const Navbar = withRouter(({ history }) => (
       <nav>
         <MenuButton history={history} />
         <div className='menu-items-container'>
-          <div className='logo'>Logo</div>
+          <div className='logo'>Request Manager</div>
           <MenuItems history={history} className="links-container_horizontal" />
         </div>
       </nav>
-    </Header>}
+    </Header>
+    }
+    {auth.isAuthenticated() && <NavigationTabs />}
   </>
-
 ));
 
 export default Navbar;
