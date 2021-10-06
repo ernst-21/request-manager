@@ -15,15 +15,11 @@ const create = async (agent) => {
 };
 
 const list = async (signal) => {
-  try {
-    let response = await fetch('http://localhost:8000/api/users/', {
-      method: 'GET',
-      signal: signal
-    });
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
+  let response = await fetch('http://localhost:8000/api/users/', {
+    method: 'GET',
+    signal: signal
+  });
+  return await response.json();
 };
 
 const read = async (params, credentials) => {
