@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import MenuButton from './MenuButton';
 import { Layout } from 'antd';
 import auth from '../../modules/auth/auth-helper';
-import NavigationTabs from '../../modules/travelers/NavigationTabs';
+import NavigationTabs from '../../modules/travelers/components/NavigationTabs';
 
 const { Header } = Layout;
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './layout/Content/Home';
-import Pipeline from './modules/travelers/Pipeline';
+import Pipeline from './modules/travelers/pages/Pipeline';
 import Signin from './modules/auth/Signin';
 import EditProfile from './modules/agent/EditProfile';
 import PrivateRoute from './modules/auth/PrivateRoute';
 import InfoSuccess from './modules/agent/InfoSuccess';
 import InfoError from './components/InfoError';
-import TravelerInfo from './modules/travelers/TravelerInfo';
-import TodoList from './modules/travelers/TodoList';
+import TravelerInfo from './modules/travelers/pages/TravelerInfo';
+import TodoList from './modules/travelers/pages/TodoList';
 
 const MainRouter = () => {
   return (
