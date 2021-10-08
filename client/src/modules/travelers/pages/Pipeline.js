@@ -25,7 +25,7 @@ const Pipeline = () => {
 
   const discoveryTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'Discovery'), [travelers]);
 
-  const firstIntinerarytTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'First Itinerary Creation'), [travelers]);
+  const firstItineraryTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'First Itinerary Creation'), [travelers]);
 
   const fineTuningTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'Fine Tuning'), [travelers]);
 
@@ -42,7 +42,7 @@ const Pipeline = () => {
     },
     [uuidv4()]: {
       name: 'First Itinerary Creation',
-      items: firstIntinerarytTravelers
+      items: firstItineraryTravelers
     },
     [uuidv4()]: {
       name: 'Fine Tuning',
