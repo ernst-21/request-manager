@@ -71,8 +71,24 @@ const update = async (req, res, next) => {
   }
 };
 
+const dragTravelerCard = (req, res) => {
+  let userId = req.body.id;
+  User.findByIdAndUpdate(userId, {
+    negotiationDueDate: req.body.negotiationDueDate,
+    negotiationStage: req.body.negotiationStage,
+    negotiationStageAction: req.body.negotiationStageAction
+  }, {new: true}, function(err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
 exports.create = create;
 exports.list = list;
 exports.userByID = userByID;
 exports.read = read;
 exports.update = update;
+exports.dragTravelerCard = dragTravelerCard;

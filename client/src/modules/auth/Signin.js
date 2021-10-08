@@ -36,7 +36,7 @@ const Signin = (props) => {
   const onFill = () => {
     form.setFieldsValue({
       email: 'agent@test.com',
-      password: 'P4ssword*',
+      password: 'P4ssword*'
     });
   };
 
@@ -102,15 +102,16 @@ const Signin = (props) => {
               }
             ]}
           >
-            <Input.Password placeholder='Password' size='large'/>
+            <Input.Password placeholder='Password' size='large' />
           </Form.Item>
           <Form.Item>
             <Button size='large' className='signin-btn' type="primary" htmlType="submit">
               Login
             </Button>
           </Form.Item>
-          <div className='fillValues-btn' onClick={onFill}><p>Use these credentials to login</p></div>
+          <div className='fillValues-btn' onClick={onFill}><p>Click me and use these credentials to login</p></div>
         </Form>
+        <p style={{ color: 'darkgray' }}>©2021 created by Ernst-21</p>
       </Card>
     </div>
   );

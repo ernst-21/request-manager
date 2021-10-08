@@ -25,7 +25,7 @@ const list = async (signal) => {
 const read = async (params, credentials) => {
   try {
     let response = await fetch(
-      'http://localhost:5000/api/users/' + params.userId,
+      'http://localhost:8000/api/users/' + params.userId,
       {
         method: 'GET',
         headers: {
@@ -42,23 +42,35 @@ const read = async (params, credentials) => {
 };
 
 const update = async (params, credentials, user) => {
-  try {
-    let response = await fetch(
-      'http://localhost:8000/api/users/' + params.userId,
-      {
-        method: 'PUT',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + credentials.t
-        },
-        body: JSON.stringify(user)
-      }
-    );
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
+  let response = await fetch(
+    'http://localhost:8000/api/users/' + params.userId,
+    {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + credentials.t
+      },
+      body: JSON.stringify(user)
+    }
+  );
+  return await response.json();
 };
 
-export { create, list, read, update };
+const dragTravelerCard = async (traveler) => {
+  let response = await fetch(
+    'http://localhost:8000/api/users/dragCard',
+    {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        //Authorization: 'Bearer ' + credentials.t
+      },
+      body: JSON.stringify(traveler)
+    }
+  );
+  return await response.json();
+};
+
+export { create, list, read, update, dragTravelerCard };

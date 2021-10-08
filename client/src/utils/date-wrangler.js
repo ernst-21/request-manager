@@ -12,9 +12,9 @@ export const dateDiff = (date1, date2) => {
 export const dueDate = (date) => {
   const now = new Date();
   const difference = moment(date, 'YYYY-MM-DD').diff(moment(now, 'YYYY-MM-DD'), 'days');
-  if (difference <= 0) {
+  if (difference < 0) {
     return '#db2c24';
-  } else if (difference >= 1) {
-    return 'green';
+  } else if (difference >= 0) {
+    return '#129cab';
   }
 };

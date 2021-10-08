@@ -1,23 +1,35 @@
 import { useMemo, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
-import { list } from '../../agent/api-agent';
+import { list, dragTravelerCard } from '../../agent/api-agent';
 import TravelerCard from '../components/TravelerCard';
-import {onDragEnd} from '../../../utils/pipeline-draggables';
+import { onDragEnd } from '../../../utils/pipeline-draggables';
 
 const Pipeline = () => {
   const [columns, setColumns] = useState([]);
-  const { data: travelers = [], isLoading, isError } = useQuery('travelers', () => list().then(data => data));
+  const { data: travelers = [], isLoading, isError, isFetching } = useQuery('travelers', () => list().then(data => data));
+
+  const queryClient = useQueryClient();
+
+  const { mutate: dragMutation, isError: dragError, isLoading: dragLoading } = useMutation((traveler) => dragTravelerCard(traveler).then(data => data), {
+    onSuccess: data => {
+      console.log(data);
+      queryClient.setQueryData('travelers', old => [...old, data]);
+      queryClient.invalidateQueries('travelers');
+    }
+  });
 
   const newRequestTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'New Request'), [travelers]);
 
   const discoveryTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'Discovery'), [travelers]);
 
-  const firstIntinerarytTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'First Itinerary'), [travelers]);
+  const firstIntinerarytTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'First Itinerary Creation'), [travelers]);
 
   const fineTuningTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'Fine Tuning'), [travelers]);
+
+  const validatedTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'Itinerary validated'), [travelers]);
 
   const columnsFromBackend = {
     [uuidv4()]: {
@@ -29,12 +41,16 @@ const Pipeline = () => {
       items: discoveryTravelers
     },
     [uuidv4()]: {
-      name: 'First Itinerary',
+      name: 'First Itinerary Creation',
       items: firstIntinerarytTravelers
     },
     [uuidv4()]: {
       name: 'Fine Tuning',
       items: fineTuningTravelers
+    },
+    [uuidv4()]: {
+      name: 'Itinerary validated',
+      items: validatedTravelers
     }
   };
 
@@ -45,11 +61,11 @@ const Pipeline = () => {
     //eslint-disable-next-line
   }, [travelers.length]);
 
-  if (isLoading || travelers.length === 0) {
+  if (isFetching || dragLoading || isLoading || travelers.length === 0) {
     return <h1>Loading ...</h1>;
   }
 
-  if (isError) {
+  if (isError || dragError) {
     return <Redirect to="/info-network-error" />;
   }
 
@@ -57,7 +73,7 @@ const Pipeline = () => {
     <div className='pipeline-container'>
       <div className='pipeline-columns__container'>
         <DragDropContext
-          onDragEnd={result => onDragEnd(result, columns, setColumns)}
+          onDragEnd={result => onDragEnd(result, columns, setColumns, dragMutation)}
         >
           {Object.entries(columns).map(([columnId, column]) => {
             return (

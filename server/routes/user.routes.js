@@ -8,6 +8,8 @@ router.route('/api/users').get(userCtrl.list).post(userCtrl.create);
 
 router.param('userId', userCtrl.userByID);
 
+router.route('/api/users/dragCard').put(userCtrl.dragTravelerCard)
+
 router
   .route('/api/users/:userId')
   .get(authCtrl.requireSignin, userCtrl.read)
