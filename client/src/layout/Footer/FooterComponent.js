@@ -5,7 +5,7 @@ const { Footer } = Layout;
 
 const FooterComponent = () => {
   return (
-    <Footer style={{ textAlign: 'center' }}>
+    <Footer style={{ textAlign: 'center'}}>
       ©2021 created by
       Ernst-21
     </Footer>

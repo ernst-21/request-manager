@@ -1,52 +1,15 @@
 import { useMemo, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { list } from '../../agent/api-agent';
-
-const onDragEnd = (result, columns, setColumns) => {
-  if (!result.destination) return;
-  const { source, destination } = result;
-
-  if (source.droppableId !== destination.droppableId) {
-    const sourceColumn = columns[source.droppableId];
-    const destColumn = columns[destination.droppableId];
-    const sourceItems = [...sourceColumn.items];
-    const destItems = [...destColumn.items];
-    const [removed] = sourceItems.splice(source.index, 1);
-    destItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...sourceColumn,
-        items: sourceItems
-      },
-      [destination.droppableId]: {
-        ...destColumn,
-        items: destItems
-      }
-    });
-  } else {
-    const column = columns[source.droppableId];
-    const copiedItems = [...column.items];
-    const [removed] = copiedItems.splice(source.index, 1);
-    copiedItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...column,
-        items: copiedItems
-      }
-    });
-  }
-};
+import TravelerCard from '../components/TravelerCard';
+import {onDragEnd} from '../../../utils/pipeline-draggables';
 
 const Pipeline = () => {
   const [columns, setColumns] = useState([]);
-  const { data: travelers = [], isLoading, isError } = useQuery('travelers', () => list().then(data => data), {
-    onSuccess: data => console.log(data)
-  });
+  const { data: travelers = [], isLoading, isError } = useQuery('travelers', () => list().then(data => data));
 
   const newRequestTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'New Request'), [travelers]);
 
@@ -102,7 +65,9 @@ const Pipeline = () => {
                 className='pipeline-column'
                 key={columnId}
               >
-                <h2 className='pipeline-column__name'>{column.name} ({column.items.length})</h2>
+                <h2 className='pipeline-column__name'>
+                  {column.name} ({column.items.length})
+                </h2>
                 <div style={{ margin: 8 }}>
                   <Droppable droppableId={columnId} key={columnId}>
                     {(provided, snapshot) => {
@@ -119,38 +84,11 @@ const Pipeline = () => {
                         >
                           {column.items.map((item, index) => {
                             return (
-                              <Draggable
+                              <TravelerCard
                                 key={item._id}
-                                draggableId={item._id}
+                                traveler={item}
                                 index={index}
-                              >
-                                {(provided, snapshot) => {
-                                  return (
-                                    <div
-                                      ref={provided.innerRef}
-                                      {...provided.draggableProps}
-                                      {...provided.dragHandleProps}
-                                      style={{
-                                        userSelect: 'none',
-                                        padding: 16,
-                                        margin: '0 0 8px 0',
-                                        height: '168px',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        borderRadius: '10px',
-                                        backgroundColor: snapshot.isDragging
-                                          ? '#263B4A'
-                                          : 'white',
-                                        color: 'black',
-                                        ...provided.draggableProps.style
-                                      }}
-                                    >
-                                      <h3>{item.negotiationStageAction}</h3>
-                                      {item.name}
-                                    </div>
-                                  );
-                                }}
-                              </Draggable>
+                              />
                             );
                           })}
                           {provided.placeholder}

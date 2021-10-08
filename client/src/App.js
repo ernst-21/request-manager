@@ -12,7 +12,7 @@ function App() {
     <Layout>
       <BrowserRouter>
         <Navbar />
-        <Content>
+        <Content style={{marginTop: 110}}>
           <MainRouter />
         </Content>
       </BrowserRouter>

@@ -2,7 +2,6 @@
 .ant-layout {
   min-height: 100vh;
   background-color: #fff;
-  overflow-y: auto;
 }
 
 .ant-layout-header {
@@ -18,7 +17,7 @@
 
 .ant-layout-content {
   flex: auto;
-  min-height: 100vh;
+  min-height: 0;
 }
 
 .site-layout-background {
@@ -26,4 +25,11 @@
   justify-content: center;
   min-height: 100%;
   width: 100%;
+}
+
+.ant-layout-footer {
+  height: 40px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
