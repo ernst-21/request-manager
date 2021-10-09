@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { list, dragTravelerCard } from '../../agent/api-agent';
 import TravelerCard from '../components/TravelerCard';
 import { onDragEnd } from '../../../utils/pipeline-draggables';
+import BubbleLoader from '../../../components/UI/BubbleLoader';
 
 const Pipeline = () => {
   const [columns, setColumns] = useState([]);
@@ -62,7 +63,7 @@ const Pipeline = () => {
   }, [travelers.length]);
 
   if (isFetching || dragLoading || isLoading || travelers.length === 0) {
-    return <h1>Loading ...</h1>;
+    return <BubbleLoader />;
   }
 
   if (isError || dragError) {
