@@ -11,13 +11,58 @@
 }
 
 .travelers-list__container {
-  width: 60%;
-  border: 1px solid yellow;
+  width: 98%;
   display: flex;
   flex-direction: column;
+  border-radius: 6px;
 }
 
 .traveler-list__item {
   background-color: white;
+  padding: 1em;
+  border-radius: 6px;
   border-bottom: 1px solid lightgray;
+  margin-bottom: 4px;
+}
+
+.travelers-list__actions-name__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.traveler-list__item-name {
+  font-weight: 500;
+  color: #343a40;
+}
+
+.traveler-list__item-negoStage {
+  color: #8a8a8a;
+}
+
+.todo-list-date__container {
+  text-align: center;
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+@media (min-width: 768px) {
+  .todo-list-date__container {
+    width: 60%;
+  }
+  .travelers-list__actions-name__container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .travelers-list__container {
+    width: 60%;
+    h1 {
+      float: left;
+    }
+  }
 }

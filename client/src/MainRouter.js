@@ -17,10 +17,10 @@ const MainRouter = () => {
         <Redirect exact from="/" to="/signin" />
         <Route exact path="/" component={Home} />
         <Route exact path="/users" component={Pipeline} />
-        <Route path="/users/todo" component={TodoList} />
+        <Route exact path="/users/todo" component={TodoList} />
         <Route path="/signin" component={Signin} />
         <Route path="/info" component={InfoSuccess} />
-        <Route path='/users/:userId' component={TravelerInfo}/>
+        <Route path='/user/:userId' component={TravelerInfo}/>
         <Route path="/info-network-error" component={InfoError} />
         <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
       </Switch>

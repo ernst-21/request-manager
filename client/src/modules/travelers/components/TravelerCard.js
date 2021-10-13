@@ -4,7 +4,7 @@ import dateFormat from 'dateformat';
 import { Draggable } from 'react-beautiful-dnd';
 import { dateDiff } from '../../../utils/date-wrangler';
 import { AiFillDollarCircle, HiUsers, MdFlightTakeoff } from 'react-icons/all';
-import { dueDate } from '../../../utils/date-wrangler';
+import TravelerNegotiationDueDate from './TravelerNegotiationDueDate';
 
 const TravelerCard = (props) => {
   const estimatedDate = dateFormat(props.traveler.estimatedDate[0], 'mmmm, yyyy');
@@ -15,10 +15,8 @@ const TravelerCard = (props) => {
 
   const budget = props.traveler.budget ? '$' + props.traveler.budget * paxAmount : '--';
 
-  const dueDateBgColor = dueDate(props.traveler.negotiationDueDate);
-
   return (
-    <Link to={'/users/' + props.traveler._id}>
+    <Link to={'/user/' + props.traveler._id}>
       <Draggable
         key={props.traveler._id}
         draggableId={props.traveler._id}
@@ -49,15 +47,7 @@ const TravelerCard = (props) => {
               <div className='pipeline-card__action-date'>
                 <div className='pipeline-negoAction__wrapper'>
                   <span>{props.traveler.negotiationStageAction}</span></div>
-                <div style={{
-                  backgroundColor: dueDateBgColor,
-                  color: 'white',
-                  padding: '0 .5em',
-                  display: 'flex',
-                  alignItems: 'center',
-                  height: '22px',
-                  borderRadius: '4px'
-                }}>{dateFormat(props.traveler.negotiationDueDate, 'mmm d')}</div>
+                <TravelerNegotiationDueDate negotiationDueDate={props.traveler.negotiationDueDate} />
               </div>
               <div className='pipeline-card__additional-description-container'>
                 <span
