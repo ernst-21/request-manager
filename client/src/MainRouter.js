@@ -8,7 +8,9 @@ import PrivateRoute from './modules/auth/PrivateRoute';
 import InfoSuccess from './modules/agent/InfoSuccess';
 import InfoError from './components/InfoError';
 import TravelerInfo from './modules/travelers/pages/TravelerInfo';
-import TodoList from './modules/travelers/pages/TodoList';
+import TodoPage from './modules/travelers/pages/TodoPage';
+import TodoTomorrow from './modules/travelers/pages/TodoTomorrow';
+import TodoThisWeek from './modules/travelers/pages/TodoThisWeek';
 
 const MainRouter = () => {
   return (
@@ -17,7 +19,9 @@ const MainRouter = () => {
         <Redirect exact from="/" to="/signin" />
         <Route exact path="/" component={Home} />
         <Route exact path="/users" component={Pipeline} />
-        <Route exact path="/users/todo" component={TodoList} />
+        <Route exact path="/users/todo/today" component={TodoPage} />
+        <Route exact path="/users/todo/tomorrow" component={TodoTomorrow} />
+        <Route exact path="/users/todo/nextFive" component={TodoThisWeek} />
         <Route path="/signin" component={Signin} />
         <Route path="/info" component={InfoSuccess} />
         <Route path='/user/:userId' component={TravelerInfo}/>

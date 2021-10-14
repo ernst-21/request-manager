@@ -3,13 +3,14 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { Radio, Button } from 'antd';
 
+const navigationForDates = ['/users/todo/today', '/users/todo/tomorrow', '/users/todo/nextFive'];
+
 const NavigationTabs = () => {
   const siteLocation = useLocation().pathname;
-  const routeWithParams = siteLocation !== '/users' && siteLocation !== '/users/todo';
+  const routeWithoutParams = siteLocation !== '/users' && (!navigationForDates.includes(siteLocation));
   const [value, setValue] = useState('');
+  const [dateValue, setDateValue] = useState('today');
   const history = useHistory();
-
-  console.log(routeWithParams);
 
   useEffect(() => {
     if (siteLocation === '/users') {
@@ -24,13 +25,24 @@ const NavigationTabs = () => {
     { label: 'To Do', value: 'todo' }
   ];
 
+  const dateOptions = [
+    { label: 'Today', value: 'today' },
+    { label: 'Tomorrow', value: 'tomorrow' },
+    { label: 'Next 5 days', value: 'nextFive' },
+  ];
+
   const onRadioChange = (e) => {
     setValue(e.target.value);
     if (e.target.value === 'pipeline') {
       return history.push('/users');
     } else {
-      return history.push('/users/todo');
+      return history.push('/users/todo/today');
     }
+  };
+
+  const onRadioTimeChange = (e) => {
+    setDateValue(e.target.value);
+    history.push('/users/todo/' + e.target.value);
   };
 
   const goBack = () => {
@@ -40,16 +52,29 @@ const NavigationTabs = () => {
 
   return (
     <div className='navigation-tabs'>
-      {!routeWithParams && <Radio.Group
-        value={value}
-        defaultValue={value}
-        onChange={onRadioChange}
-        optionType="button"
-        buttonStyle="solid"
-        options={options}
-      />}
-      {routeWithParams &&
-      <Button type='text' onClick={goBack} style={{display: 'inline-flex', alignItems: 'center', fontSize: '1rem'}}><BiArrowBack style={{ fontSize: '1.7rem', marginRight: '3px' }} /> Back</Button>}
+      {!routeWithoutParams && <div className='navigation-tabs__radio-container'>
+        <Radio.Group
+          className='navigation-tabs__main-radio-btn'
+          value={value}
+          defaultValue={value}
+          onChange={onRadioChange}
+          optionType="button"
+          buttonStyle="solid"
+          options={options}
+        />
+        {navigationForDates.includes(siteLocation) && <Radio.Group
+          className='navigation-tabs__second-radio-btn'
+          value={dateValue}
+          defaultValue={dateValue}
+          onChange={onRadioTimeChange}
+          optionType="button"
+          buttonStyle="outline"
+          options={dateOptions}
+        />}
+      </div> }
+      {routeWithoutParams &&
+      <Button className='navigation-tabs__back-btn' type='text' onClick={goBack}><BiArrowBack
+        className='navigation-tabs__arrow-btn' /> Back</Button>}
     </div>
   );
 };
