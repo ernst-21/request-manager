@@ -8,7 +8,7 @@ const InfoError = () => {
       status="500"
       title="500"
       subTitle="Sorry, something went wrong."
-      extra={<Link to={'/'} type="primary"><Button>Back to Home</Button></Link>}
+      extra={<Link to={'/users'} type="primary"><Button>Back to Home</Button></Link>}
     />
   );
 };

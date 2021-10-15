@@ -14,7 +14,21 @@ const create = async (req, res, next) => {
 };
 const list = async (req, res) => {
   try {
-    let users = await User.find().select('_id name lastName range estimatedDate duration adults young children babies country budget negotiationStage negotiationDueDate negotiationStageAction'); // to define
+    let users = await User.find().select('_id name lastName range estimatedDate duration adults young children babies country budget negotiationStage negotiationDueDate negotiationStageAction');
+    res.json(users);
+  } catch (err) {
+    return res.status(400).json({
+      error: 'No users found'
+    });
+  }
+};
+
+const searchUser = async (req, res) => {
+  const name = req.body.name;
+  try {
+    let users = await User.find(
+      {$or: [{name: {$regex: name, $options: 'ig'}}, {lastName: {$regex: name, $options: 'ig'}}]}
+    ).select('_id name lastName');
     res.json(users);
   } catch (err) {
     return res.status(400).json({
@@ -77,7 +91,7 @@ const dragTravelerCard = (req, res) => {
     negotiationDueDate: req.body.negotiationDueDate,
     negotiationStage: req.body.negotiationStage,
     negotiationStageAction: req.body.negotiationStageAction
-  }, {new: true}, function(err, result) {
+  }, { new: true }, function(err, result) {
     if (err) {
       res.send(err);
     } else {
@@ -88,6 +102,7 @@ const dragTravelerCard = (req, res) => {
 
 exports.create = create;
 exports.list = list;
+exports.searchUser = searchUser;
 exports.userByID = userByID;
 exports.read = read;
 exports.update = update;

@@ -4,7 +4,7 @@ import TravelerNegotiationDueDate from './TravelerNegotiationDueDate';
 
 const TravelerListItem = (props) => {
   return (
-    <Link to={'/user/' + props.id}>
+    <Link to={'/users/' + props.id}>
       <div className='traveler-list__item'>
         <div className='travelers-list__actions-name__container'>
           <h3>{props.negotiationStage}</h3>

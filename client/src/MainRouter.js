@@ -24,7 +24,7 @@ const MainRouter = () => {
         <Route exact path="/users/todo/nextFive" component={TodoThisWeek} />
         <Route path="/signin" component={Signin} />
         <Route path="/info" component={InfoSuccess} />
-        <Route path='/user/:userId' component={TravelerInfo}/>
+        <Route path='/users/:userId' component={TravelerInfo}/>
         <Route path="/info-network-error" component={InfoError} />
         <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
       </Switch>

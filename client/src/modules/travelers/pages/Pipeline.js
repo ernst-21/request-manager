@@ -10,27 +10,46 @@ import BubbleLoader from '../../../components/UI/BubbleLoader';
 
 const Pipeline = () => {
   const [columns, setColumns] = useState([]);
-  const { data: travelers = [], isLoading, isError, isFetching } = useQuery('travelers', () => list().then(data => data));
+  const [redirectToNetError, setRedirectToNetError] = useState(false);
+  const { data: travelers = [], isLoading, status, isFetching } = useQuery('travelers', () => list().then(res => res.json()).then(data => data), {
+    onSuccess: data => {
+      if (data && data.error) {
+        setRedirectToNetError(true);
+      }
+    },
+    refetchOnWindowFocus: false
+  });
 
   const queryClient = useQueryClient();
 
   const { mutate: dragMutation, isError: dragError, isLoading: dragLoading } = useMutation((traveler) => dragTravelerCard(traveler).then(data => data), {
     onSuccess: data => {
-      console.log(data);
-      queryClient.setQueryData('travelers', old => [...old, data]);
-      queryClient.invalidateQueries('travelers');
+      if (data && !data.error) {
+        queryClient.setQueryData('travelers', old => [...old, data]);
+        queryClient.invalidateQueries('travelers');
+      } else {
+        setRedirectToNetError(true);
+      }
     }
   });
 
-  const newRequestTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'New Request'), [travelers]);
+  const newRequestTravelers = useMemo(() =>
+    travelers.filter(traveler => traveler.negotiationStage === 'New Request')
+  , [travelers]);
 
-  const discoveryTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'Discovery'), [travelers]);
+  const discoveryTravelers = useMemo(() =>
+    travelers.filter(traveler => traveler.negotiationStage === 'Discovery')
+  , [travelers]);
 
-  const firstItineraryTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'First Itinerary Creation'), [travelers]);
+  const firstItineraryTravelers = useMemo(() =>
+    travelers.filter(traveler => traveler.negotiationStage === 'First Itinerary Creation'), [travelers]);
 
-  const fineTuningTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'Fine Tuning'), [travelers]);
+  const fineTuningTravelers = useMemo(() =>
+    travelers.filter(traveler => traveler.negotiationStage === 'Fine Tuning'), [travelers]);
 
-  const validatedTravelers = useMemo(() => travelers.filter(traveler => traveler.negotiationStage === 'Itinerary validated'), [travelers]);
+  const validatedTravelers = useMemo(() =>
+    travelers.filter(traveler => traveler.negotiationStage === 'Itinerary validated')
+  , [travelers]);
 
   const columnsFromBackend = {
     [uuidv4()]: {
@@ -66,7 +85,7 @@ const Pipeline = () => {
     return <BubbleLoader />;
   }
 
-  if (isError || dragError) {
+  if (status === 'error' || dragError || redirectToNetError) {
     return <Redirect to="/info-network-error" />;
   }
 

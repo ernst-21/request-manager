@@ -5,6 +5,7 @@ const authCtrl = require('../controllers/auth.controller')
 const router = express.Router();
 
 router.route('/api/users').get(userCtrl.list).post(userCtrl.create);
+router.route('/api/users/search').post(userCtrl.searchUser);
 
 router.param('userId', userCtrl.userByID);
 

@@ -16,7 +16,7 @@ const TravelerCard = (props) => {
   const budget = props.traveler.budget ? '$' + props.traveler.budget * paxAmount : '--';
 
   return (
-    <Link to={'/user/' + props.traveler._id}>
+    <Link to={'/users/' + props.traveler._id}>
       <Draggable
         key={props.traveler._id}
         draggableId={props.traveler._id}

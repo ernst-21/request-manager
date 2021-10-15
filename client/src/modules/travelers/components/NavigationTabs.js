@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {useQueryClient} from 'react-query';
 import { useHistory, useLocation } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { Radio, Button } from 'antd';
@@ -7,10 +8,12 @@ const navigationForDates = ['/users/todo/today', '/users/todo/tomorrow', '/users
 
 const NavigationTabs = () => {
   const siteLocation = useLocation().pathname;
-  const routeWithoutParams = siteLocation !== '/users' && (!navigationForDates.includes(siteLocation));
+  const routeWithParams = siteLocation !== '/users' && (!navigationForDates.includes(siteLocation));
   const [value, setValue] = useState('');
   const [dateValue, setDateValue] = useState('today');
   const history = useHistory();
+
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (siteLocation === '/users') {
@@ -46,13 +49,13 @@ const NavigationTabs = () => {
   };
 
   const goBack = () => {
+    queryClient.removeQueries('user');
     history.goBack();
   };
 
-
   return (
     <div className='navigation-tabs'>
-      {!routeWithoutParams && <div className='navigation-tabs__radio-container'>
+      {!routeWithParams && <div className='navigation-tabs__radio-container'>
         <Radio.Group
           className='navigation-tabs__main-radio-btn'
           value={value}
@@ -72,7 +75,7 @@ const NavigationTabs = () => {
           options={dateOptions}
         />}
       </div> }
-      {routeWithoutParams &&
+      {routeWithParams &&
       <Button className='navigation-tabs__back-btn' type='text' onClick={goBack}><BiArrowBack
         className='navigation-tabs__arrow-btn' /> Back</Button>}
     </div>
