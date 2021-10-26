@@ -42,11 +42,11 @@ const MenuItems = (props) => {
           <li
             onClick={props.onClick}
           >
-            <NavLink to="/users/todo" activeStyle={{
+            <NavLink to="/users/todo/today" activeStyle={{
               fontWeight: 'bold',
               color: 'red'
             }}>
-              <span style={isActive(props.history, '/users/todo')}>To Do</span>
+              <span style={isActive(props.history, '/users/todo/today')}>To Do</span>
             </NavLink>
           </li>
         </>

@@ -41,6 +41,7 @@ const TravelersSearchBar = () => {
     }
     history.push('/users/' + selectedTraveler[0]._id);
     setSearchText('');
+    setTravelerOptions([]);
   };
 
   if (isError) {
