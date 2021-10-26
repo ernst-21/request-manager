@@ -34,6 +34,11 @@ const TravelersSearchBar = () => {
 
   const onSelect = (data) => {
     const selectedTraveler = travelerOptions.filter(traveler => traveler.name + ' ' + traveler.lastName === data);
+
+    if (!selectedTraveler[0]) {
+      setSearchText('');
+      return;
+    }
     history.push('/users/' + selectedTraveler[0]._id);
     setSearchText('');
   };

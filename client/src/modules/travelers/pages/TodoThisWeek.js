@@ -8,7 +8,7 @@ import moment from 'moment';
 const dateToDisplay = moment().add(2, 'days').format('MMMM Do') + ' - ' + moment().add(7, 'days').format('MMMM Do');
 
 const TodoThisWeek = () => {
-  const { data: travelers = [], isLoading, isError } = useQuery('travelers', () => list().then(data => data));
+  const { data: travelers = [], isLoading, isError } = useQuery('travelers', () => list().then(res => res.json()).then(data => data));
 
   if (isLoading || travelers.length === 0) {
     return <BubbleLoader />;
