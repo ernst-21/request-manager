@@ -1,20 +1,28 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { read } from '../../agent/api-agent';
 import { useQuery } from 'react-query';
 import { Redirect, useParams, useLocation } from 'react-router-dom';
 import auth from '../../auth/auth-helper';
 import BubbleLoader from '../../../components/UI/BubbleLoader';
-import React from 'react';
+import TravelerSidePanel from '../components/TravelerSidePanel';
+import TravelerInfoPanel from '../components/TravelerInfoPanel';
 
 const TravelerInfo = () => {
   const siteLocation = useLocation().pathname;
   const jwt = auth.isAuthenticated();
   const userId = useParams().userId;
 
-  const { data: user, isLoading, isError, refetch } = useQuery('user', () => read({ userId }, { t: jwt.token }).then(data => data));
+  const {
+    data: user,
+    isLoading,
+    isError,
+    refetch
+  } = useQuery('user', () =>
+    read({ userId }, { t: jwt.token }).then((data) => data)
+  );
 
   useEffect(() => {
-    refetch().then(data => data);
+    refetch().then((data) => data);
 
     //eslint-disable-next-line
   }, [refetch, userId]);
@@ -28,11 +36,29 @@ const TravelerInfo = () => {
   }
 
   if (siteLocation === '/users/' + userId + '/discussion') {
-    return <h1>{user.name} {user._id}</h1>;
+    return (
+      <div className="traveler-info__view">
+        <div className="traveler-sidepanel__wrapper">
+          <TravelerSidePanel traveler={user} />
+        </div>
+        <div className="traveler-info__discussion-panel">
+          <h1>
+            {user._id} {user.country}
+          </h1>
+        </div>
+      </div>
+    );
   }
 
   return (
-    user && <h1>{user.name} {user.lastName}</h1>
+    <div className="traveler-info__view">
+      <div className="traveler-sidepanel__wrapper">
+        <TravelerSidePanel traveler={user} />
+      </div>
+      <div className="traveler-info__wrapper">
+        <TravelerInfoPanel traveler={user} />
+      </div>
+    </div>
   );
 };
 
