@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { list } from '../../agent/api-agent';
 import BubbleLoader from '../../../components/UI/BubbleLoader';
-import TodoList from '../components/TodoList';
+import TodoList from '../components/Todo/TodoList';
 import moment from 'moment';
 
 const dateToDisplay = moment().format('dddd, MMMM Do');

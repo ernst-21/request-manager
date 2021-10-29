@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { list } from '../../agent/api-agent';
 import BubbleLoader from '../../../components/UI/BubbleLoader';
 import { Redirect } from 'react-router-dom';
-import TodoList from '../components/TodoList';
+import TodoList from '../components/Todo/TodoList';
 import moment from 'moment';
 
 const dateToDisplay = moment().add(1, 'days').format('dddd, MMMM Do');

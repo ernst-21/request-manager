@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { Button } from 'antd';
 import TodoTabs from './TodoTabs';
-import ClientTabs from './ClientTabs';
+import ClientTabs from '../Negotiation/ClientTabs';
 
 const navigationForDates = ['/users/todo/today', '/users/todo/tomorrow', '/users/todo/nextFive'];
 

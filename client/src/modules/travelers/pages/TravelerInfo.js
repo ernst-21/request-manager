@@ -4,8 +4,8 @@ import { useQuery } from 'react-query';
 import { Redirect, useParams, useLocation } from 'react-router-dom';
 import auth from '../../auth/auth-helper';
 import BubbleLoader from '../../../components/UI/BubbleLoader';
-import TravelerSidePanel from '../components/TravelerSidePanel';
-import TravelerInfoPanel from '../components/TravelerInfoPanel';
+import TravelerSidePanel from '../components/Negotiation/TravelerSidePanel';
+import TravelerInfoPanel from '../components/Negotiation/TravelerInfoPanel';
 
 const TravelerInfo = () => {
   const siteLocation = useLocation().pathname;

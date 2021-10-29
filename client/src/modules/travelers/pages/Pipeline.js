@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { list, dragTravelerCard } from '../../agent/api-agent';
-import TravelerCard from '../components/TravelerCard';
+import TravelerCard from '../components/Pipeline/TravelerCard';
 import { onDragEnd } from '../../../utils/pipeline-draggables';
 import BubbleLoader from '../../../components/UI/BubbleLoader';
 

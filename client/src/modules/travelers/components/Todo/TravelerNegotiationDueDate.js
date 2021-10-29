@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import dateFormat from 'dateformat';
-import { dueDate } from '../../../utils/date-wrangler';
+import { dueDate } from '../../../../utils/date-wrangler';
 
 const TravelerNegotiationDueDate = (props) => {
 

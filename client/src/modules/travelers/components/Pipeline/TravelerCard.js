@@ -2,9 +2,9 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import { Draggable } from 'react-beautiful-dnd';
-import { dateDiff } from '../../../utils/date-wrangler';
+import { dateDiff } from '../../../../utils/date-wrangler';
 import { AiFillDollarCircle, HiUsers, MdFlightTakeoff } from 'react-icons/all';
-import TravelerNegotiationDueDate from './TravelerNegotiationDueDate';
+import TravelerNegotiationDueDate from '../Todo/TravelerNegotiationDueDate';
 
 const TravelerCard = (props) => {
   const estimatedDate = dateFormat(props.traveler.estimatedDate[0], 'mmmm, yyyy');

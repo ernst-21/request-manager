@@ -1,9 +1,9 @@
 import { memo, useMemo } from 'react';
-import auth from '../../auth/auth-helper';
+import auth from '../../../auth/auth-helper';
 import { Col, Row, Rate } from 'antd';
 import {VscCircleFilled} from 'react-icons/vsc';
 import moment from 'moment';
-import { dateDiff } from '../../../utils/date-wrangler';
+import { dateDiff } from '../../../../utils/date-wrangler';
 
 const TravelerMainInfoCard = (props) => {
 
@@ -42,7 +42,7 @@ const TravelerMainInfoCard = (props) => {
         </Col>
         <Col span={8} >
           <p className='traveler-info__column-title'>Dossier&apos;s Total Budget</p>
-          <p className='traveler-info__column-content'>{props.traveler.budget ? props.traveler.budget * pax : '-'}</p>
+          <p className='traveler-info__column-content'>${props.traveler.budget ? props.traveler.budget * pax : '-'}</p>
         </Col>
 
         <Col span={8} >
