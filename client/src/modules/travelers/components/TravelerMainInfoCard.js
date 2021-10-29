@@ -20,42 +20,42 @@ const TravelerMainInfoCard = (props) => {
       <h2>Main Information</h2>
       <Row gutter={[24, 24]}>
         <Col span={8} >
-          <p>Managed by</p>
-          <p>{auth.isAuthenticated().user.name}</p>
+          <p className='traveler-info__column-title'>Managed by</p>
+          <p className='traveler-info__column-content'>{auth.isAuthenticated().user.name}</p>
         </Col>
         <Col span={8} >
-          <p>Market</p>
-          <p>{props.traveler.country}</p>
+          <p className='traveler-info__column-title'>Market</p>
+          <p className='traveler-info__column-content'>{props.traveler.country}</p>
         </Col>
         <Col span={8} >
-          <p>Destination</p>
-          <p>Cuba</p>
+          <p className='traveler-info__column-title'>Destination</p>
+          <p className='traveler-info__column-content'>Cuba</p>
         </Col>
 
         <Col span={8} >
-          <p>Evaneos Rating</p>
+          <p className='traveler-info__column-title'>Evaneos Rating</p>
           <Rate character={<VscCircleFilled style={{fontSize: '1.3rem'}} />} disabled value={props.traveler.rating} />
         </Col>
         <Col span={8} >
-          <p>Number of PAX</p>
-          <p>{pax}</p>
+          <p className='traveler-info__column-title'>Number of PAX</p>
+          <p className='traveler-info__column-content'>{pax}</p>
         </Col>
         <Col span={8} >
-          <p>Dossier&apos;s Total Budget</p>
-          {props.traveler.budget ? props.traveler.budget * pax : '-'}
+          <p className='traveler-info__column-title'>Dossier&apos;s Total Budget</p>
+          <p className='traveler-info__column-content'>{props.traveler.budget ? props.traveler.budget * pax : '-'}</p>
         </Col>
 
         <Col span={8} >
-          <p>Start of Services</p>
-          <p>{moment(startDate).format('MMMM Do, yyyy')}</p>
+          <p className='traveler-info__column-title'>Start of Services</p>
+          <p className='traveler-info__column-content'>{moment(startDate).format('MMMM Do, yyyy')}</p>
         </Col>
         <Col span={8} >
-          <p>End of Services</p>
-          <p>{endDate !== '--' ? moment(endDate).format('MMMM Do, yyyy') : '--'}</p>
+          <p className='traveler-info__column-title'>End of Services</p>
+          <p className='traveler-info__column-content'>{endDate !== '--' ? moment(endDate).format('MMMM Do, yyyy') : '--'}</p>
         </Col>
         <Col span={8} >
-          <p>Length of trip</p>
-          <p>{travelDuration}</p>
+          <p className='traveler-info__column-title'>Length of trip</p>
+          <p className='traveler-info__column-content'>{travelDuration}</p>
         </Col>
       </Row>
     </>
