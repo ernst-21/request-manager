@@ -9,7 +9,7 @@ const TravelerInfoPanel = (props) => {
         <TravelerMainInfoCard traveler={props.traveler} />
       </div>
       <div className='traveler-info__main-info-card'>
-        <TravelerProfileCard />
+        <TravelerProfileCard traveler={props.traveler} />
       </div>
     </div>
   );

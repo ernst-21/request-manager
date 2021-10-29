@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
     required: 'Password is required'
   },
   stage: { type: String, trim: true },
-  with: { type: String, trim: true },
+  travelPartners: { type: String, trim: true },
   motive: {type: String},
   knowDate: { type: String, trim: true },
   range: [{ type: Date }],
