@@ -13,7 +13,7 @@ const NavigationTabs = () => {
   const routeWithParams = siteLocation !== '/users' && (!navigationForDates.includes(siteLocation));
   const [value, setValue] = useState('');
   const [dateValue, setDateValue] = useState('today');
-  const [customerTabValue, setCustomerTabValue] = useState('discussion');
+  const [customerTabValue, setCustomerTabValue] = useState('info');
   const history = useHistory();
 
   const queryClient = useQueryClient();
@@ -28,6 +28,7 @@ const NavigationTabs = () => {
 
   const goBack = () => {
     queryClient.removeQueries('user');
+    setCustomerTabValue('info');
     history.push('/users');
   };
 

@@ -6,6 +6,7 @@ import auth from '../../auth/auth-helper';
 import BubbleLoader from '../../../components/UI/BubbleLoader';
 import TravelerSidePanel from '../components/Negotiation/TravelerSidePanel';
 import TravelerInfoPanel from '../components/Negotiation/TravelerInfoPanel';
+import TravelerDiscussionPanel from '../components/Negotiation/TravelerDiscussionPanel';
 
 const TravelerInfo = () => {
   const siteLocation = useLocation().pathname;
@@ -42,24 +43,24 @@ const TravelerInfo = () => {
           <TravelerSidePanel traveler={user} />
         </div>
         <div className="traveler-info__discussion-panel">
-          <h1>
-            {user._id} {user.country}
-          </h1>
+          <TravelerDiscussionPanel traveler={user} />
         </div>
       </div>
     );
   }
 
-  return (
-    <div className="traveler-info__view">
-      <div className="traveler-sidepanel__wrapper">
-        <TravelerSidePanel traveler={user} />
+  if (siteLocation === '/users/' + userId) {
+    return (
+      <div className="traveler-info__view">
+        <div className="traveler-sidepanel__wrapper">
+          <TravelerSidePanel traveler={user} />
+        </div>
+        <div className="traveler-info__wrapper">
+          <TravelerInfoPanel traveler={user} />
+        </div>
       </div>
-      <div className="traveler-info__wrapper">
-        <TravelerInfoPanel traveler={user} />
-      </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default TravelerInfo;

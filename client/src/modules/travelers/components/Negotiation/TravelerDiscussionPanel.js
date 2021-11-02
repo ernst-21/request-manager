@@ -1,11 +1,11 @@
-import React from 'react';
+import { memo } from 'react';
 
-const TravelerDiscussionPanel = () => {
+const TravelerDiscussionPanel = (props) => {
   return (
-    <div>
-
-    </div>
+    <h1>
+      {props.traveler._id} {props.traveler.name} {props.traveler.country}
+    </h1>
   );
 };
 
-export default TravelerDiscussionPanel;
+export default memo(TravelerDiscussionPanel);

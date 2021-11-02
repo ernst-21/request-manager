@@ -19,7 +19,6 @@ const ClientTabs = (props) => {
   ];
 
   const onRadioChange = (e) => {
-
     props.setCustomerTabValue(e.target.value);
     if (e.target.value === 'info') {
       history.push('/users/' + userId);
@@ -33,7 +32,7 @@ const ClientTabs = (props) => {
       <Radio.Group
         className='navigation-tabs__second-radio-btn'
         value={props.customerTabValue}
-        defaultValue={props.customerTabValue}
+        initialValue='info'
         onChange={onRadioChange}
         optionType="button"
         buttonStyle="outline"
