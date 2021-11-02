@@ -7,11 +7,19 @@ const ClientTabs = (props) => {
   const [userId, setUserId] = useState('');
   const history = useHistory();
 
+
   useEffect(() => {
     const userIdArray = siteLocation.split('/');
     setUserId(userIdArray[2]);
 
   }, [siteLocation]);
+
+  useEffect(() => {
+    if (siteLocation === '/users/' + userId) {
+      props.setCustomerTabValue('info');
+    }
+    //eslint-disable-next-line
+  }, [siteLocation, userId])
 
   const customerTabs = [
     { label: 'Information', value: 'info' },
